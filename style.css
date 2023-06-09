@@ -1,0 +1,23 @@
+
+.textBox {
+    width: 25px;
+    height: 25px;
+    border-style: dashed;
+    border-width: 1px;
+    color: black;
+    text-align: center;
+}
+
+.rowOfBoxes {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.painted {
+    background-color: black;
+}
+
+.titles {
+    text-align: center;
+}

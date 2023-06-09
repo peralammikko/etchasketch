@@ -6,6 +6,7 @@
     border-width: 1px;
     color: black;
     text-align: center;
+    background-color: white;
 }
 
 .rowOfBoxes {
@@ -20,4 +21,12 @@
 
 .titles {
     text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    padding-top: 50px;
 }

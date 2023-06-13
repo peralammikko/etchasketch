@@ -1,53 +1,57 @@
-function initBoxes(squares = 16) {
-    const container = document.querySelector("#container");
-    container.innerHTML = "";
-    
-    for (let i = 0; i < squares; i++) {
-        let boxRow = document.createElement('div');
-        boxRow.classList.add('rowOfBoxes');
-        for (let j = 0; j < squares; j++) {
-            let divBox = document.createElement('div');
-            divBox.classList.add('textBox');
-            boxRow.appendChild(divBox);
-        }
-        container.appendChild(boxRow);
+const grid = document.querySelector('.grid');
+const gridWidth = grid.clientWidth;
+
+createGrid();
+
+function removeAllChildNodes(parent) {
+    while(parent.firstChild) {
+        parent.removeChild(parent.firstChild);
     }
-    initBoxListeners();
 }
 
-function initBoxListeners() {
-    const boxes = document.querySelectorAll('div.textBox');
-    boxes.forEach(box => {
-        box.addEventListener('mouseover', (e) => {
-            box.classList.add('painted');
-        });
-    }); 
+function createSquare(sqSize) {
+    let divBox = document.createElement('div');
+    divBox.classList.add('box');
+    divBox.style.width = sqSize;
+    divBox.style.height = sqSize;
+    divBox.addEventListener('mouseover', function(event) {
+        event.target.style.backgroundColor = 'black';
+    });
+
+    return divBox;
+}
+
+function createGrid(size = 16) {
+    const squares = size**2;
+    for (let i = 0; i < squares; i++) {
+        grid.appendChild(createSquare(gridWidth/squares));
+    }
 }
 
 function resetGrid() {
-    const boxes = document.querySelectorAll('.painted');
+    const boxes = document.querySelectorAll('.box');
     boxes.forEach(box => {
-        box.classList.remove('painted');
-    })
-}
-
-function initButtons() {
-    const resetBtn = document.querySelector('#resetButton');
-    const gridBtn = document.querySelector('#setGridButton');
-    
-    resetBtn.addEventListener('click', () => {
-        resetGrid();
-    });
-    
-    gridBtn.addEventListener('click', () => {
-        let setSquares = prompt("Set number of squares in grid (max 100):");
-        if (setSquares > 100) {
-            alert("Error: Number of squares must be between 1-100");
-        } else {
-            initBoxes(setSquares);
-        }
+        box.style.backgroundColor = 'white';
     });
 }
 
-initBoxes();
-initButtons();
+// Reset button init
+const resetBtn = document.querySelector('#resetButton');
+resetBtn.addEventListener('click', () => {
+    resetGrid();
+});
+
+
+// Grid resize button init
+const gridBtn = document.querySelector('#setGridButton');
+gridBtn.addEventListener('click', () => {
+    let gridSize = prompt("Set number of squares in grid (max 100):");
+    if (gridSize > 100) {
+        alert("Error: Number of squares must be between 1-100");
+    } else {
+        removeAllChildNodes(grid);
+        grid.setAttribute('style', `grid-template-columns: repeat(${gridSize}, 2fr); grid-template-rows: repeat(${gridSize}, 2fr);`);
+        createGrid(gridSize);
+    }
+});
+

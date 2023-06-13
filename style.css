@@ -1,32 +1,22 @@
-.contentBox {
+body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
-.boxContainer {
-    max-width: 960px;
+.grid {
+    width: 600px;
+    height: 600px;
+    display: grid;
+    grid-template-columns: repeat(16, 2fr);
+    grid-template-rows: repeat(16, 2fr);
 }
 
 
-.textBox {
-    width: 25px;
-    height: 25px;
-    border-style: solid;
-    border-width: 1px;
-    color: rgb(82, 82, 82);
-    text-align: center;
+.box {
+    border: 1px solid black;
     background-color: white;
-}
-
-.rowOfBoxes {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.painted {
-    background-color: black;
 }
 
 .titles {
